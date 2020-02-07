@@ -1,0 +1,72 @@
+<!-- 载入静态文件 -->
+{% load staticfiles %}
+
+<!-- 网站主语言 -->
+<!DOCTYPE html>
+<!-- 网站采用的字符编码 -->
+<html lang="zh-cn">
+  <!-- 预留网站标题的位置 -->
+  <head>
+    <meta charset="utf-8" />
+    <title>{% block title %}{% endblock %}</title>
+    <!-- 引入bootstrap的css文件 -->
+    <link
+      rel="stylesheet"
+      href="{% static 'bootstrap/css/bootstrap.min.css' %}"
+    />
+  </head>
+  <body>
+    <!-- 引入导航栏 -->
+    {% include 'header.html' %}
+
+    <!--footer 沉底-->
+    <div id="wrapper">
+      <!-- 预留具体页面的位置 -->
+      {% block content %}{% endblock content %}
+      <div id="push"></div>
+    </div>
+
+    <!-- 引入注脚 -->
+    {% include 'footer.html' %}
+    <!-- bootstrap.js 依赖 jquery.js 和popper.js，因此在这里引入 -->
+    <script src="{% static 'jquery/jquery-3.3.js' %}"></script>
+    <!--引入layer.js -->
+    <script src="{% static 'layer/layer.js' %}"></script>
+    <script src="{% static 'popper/popper-version.js' %}"></script>
+    <!-- 引入bootstrap的js文件 -->
+    <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+    <!-- 引入monikai.css -->
+    <link rel="stylesheet" href="{% static 'md_css/monokai.css' %}" />
+    <!--引入font awesome-->
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+      integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
+      crossorigin="anonymous"
+    />
+
+    {% block script %} {% endblock script%}
+
+    <!--z-index设置成了一个很大的数值-->
+    {% include 'back_to_top_func.html'%}
+
+    <!-- 增加样式 -->
+    <style>
+      html,
+      body {
+        height: 100%;
+        margin: 0;
+      }
+
+      #wrapper {
+        min-height: 100%;
+        margin-bottom: -60px;
+      }
+
+      #footer,
+      #push {
+        height: 60px;
+      }
+    </style>
+  </body>
+</html>
